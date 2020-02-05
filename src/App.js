@@ -1,5 +1,5 @@
 import React from "react";
-import Counter from "./Counter.js";
+import InputSample from "./InputSample";
 
 function App() {
   return (
@@ -8,7 +8,8 @@ function App() {
     //   <Hello />
     //   {/* Wrapper태그 사이에 들어있는 것이 children이 된다. */}
     // </Wrapper>
-    <Counter />
+    // <Counter />
+    <InputSample />
   );
 }
 
