@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 
-function reduce(state, action) {
+function reducer(state, action) {
   switch (action.type) {
     case "INCREMENT":
       return state + 1;
@@ -12,7 +12,9 @@ function reduce(state, action) {
 }
 
 function Counter() {
-  const [number, dispatch] = useReducer(reduce, 0);
+  const [number, dispatch] = useReducer(reducer, 0); //(위에 생성한 reducer 함수, 사용하고자 하는 초기값)
+  //number= 현재의 상태
+  //dispatch= 액션을 발생시킨다.
   const onIncrease = () => {
     //setNumber(prevNumber => prevNumber + 1); //함수형 업데이트. 최적화와 관련되어있다.
     dispatch({
