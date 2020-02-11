@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserDispatch } from "./App";
 
-const User = React.memo(function User({ user, onRemove, onToggle }) {
-  // const { username, email, id, active } = user;
+const User = React.memo(function User({ user }) {
+  const dispatch = useContext(UserDispatch);
   // useEffect(() => {
   //   //UI가 나타난 이후에 실행된다.
   //   // console.log("component mount");
@@ -21,18 +22,32 @@ const User = React.memo(function User({ user, onRemove, onToggle }) {
     <div>
       <b
         style={{ color: user.active ? "green" : "black", cursor: "pointer" }}
-        onClick={() => onToggle(user.id)}
+        onClick={() =>
+          dispatch({
+            type: "TOGGLE_USER",
+            id: user.id
+          })
+        }
       >
         {user.username}
       </b>
       &nbsp;
       <span>({user.email})</span>
-      <button onClick={() => onRemove(user.id)}>delete</button>{" "}
+      <button
+        onClick={() =>
+          dispatch({
+            type: "REMOVE_USER",
+            id: user.id
+          })
+        }
+      >
+        delete
+      </button>{" "}
       {/* id를 파라미터로넣어주기 위해 함수를 사용 */}
     </div>
   );
 });
-function UserList({ users, onRemove, onToggle }) {
+function UserList({ users }) {
   return (
     <div>
       {/* <div>
@@ -53,12 +68,7 @@ function UserList({ users, onRemove, onToggle }) {
       <User user = {users[2]}/> */}
 
       {users.map(user => (
-        <User
-          user={user}
-          key={user.id}
-          onRemove={onRemove}
-          onToggle={onToggle}
-        />
+        <User user={user} key={user.id} />
       ))}
     </div>
   );
